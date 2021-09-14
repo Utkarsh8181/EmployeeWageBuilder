@@ -1,46 +1,48 @@
 package com.bridgelabz;
-
-import java.util.Random;
-
+/**
+ * @author Utkarsh Mishra
+ * Purpose - Employee Wage Computation using OOPS Concepts
+ */
 public class EmployeeWageBuilder {
 
-    public static final int IS_FULL_TIME = 2;
-    public static final int IS_PART_TIME = 1;
-    public static final int EMP_RATE_PER_HOUR = 20;
-    public static final int NO_OF_WORKING_DAYS = 20;
-    public static final int TOTAL_WORKING_HOURS = 100;
+    public static final int IS_FULLTIME = 1;
+    public static final int IS_PARTTIME = 2;
+    public static final int Emp_Rate_PerHr = 20;
+    public static final int NO_WORKINGDAYS = 20;
+    public static final int MAX_HRS_MONTH = 100;
 
-    public static void main(String[] args) {
-        int empHours = 0;
-        int empWage = 0;
-        int totalEmployeeWage = 0;
+    public static int computeWage() {
+        // Declaring the variables
+        int empHrs = 0;
+        int totalEmpWage = 0;
         int totalEmpHrs = 0;
         int totalWorkingDays = 0;
-        // Taking Random values 0 or 1.
-
-        while (totalEmpHrs <= TOTAL_WORKING_HOURS && totalWorkingDays < NO_OF_WORKING_DAYS){
+        /**
+         * Using Math.random method to generate random numbers 0, 1 and 2
+         */
+        while (totalEmpHrs <= MAX_HRS_MONTH && totalWorkingDays < NO_WORKINGDAYS) {
             totalWorkingDays++;
-            Random random = new Random();
-            int empCheck = random.nextInt(3);
-            switch (empCheck){
-                case IS_FULL_TIME:
-                    empHours = 8;
-                    System.out.print("The wages of Full Time employee is : ");
+            int empCheck = (int) Math.floor(Math.random() * 10) % 3;
+            switch (empCheck) {
+                case 0: // Employee is absent
+                    empHrs = 0;
+                case 1: // FullTime Employee
+                    empHrs = 8;
                     break;
-                case IS_PART_TIME:
-                    empHours = 4;
-                    System.out.print("The wages of Part time employee is : ");
+                case 2: // PartTime Employee
+                    empHrs = 4;
                     break;
-                default:
-                    empHours = 0;
-                    System.out.print("The wages of no work employee is : ");
             }
-            empWage = empHours * EMP_RATE_PER_HOUR;
-            totalEmployeeWage += empWage;
-            totalEmpHrs += empHours;
-            System.out.println(empWage);
+
+            totalEmpHrs += empHrs;
+            System.out.println("Day " + totalWorkingDays + " : Employee worked : " + empHrs + " Hours ");
         }
-        System.out.println();
-        System.out.print("The total wages of all the emplpoyee for 20 days or 100 hours is : " + totalEmployeeWage);
+        totalEmpWage = totalEmpHrs * Emp_Rate_PerHr;
+        System.out.println("Total Wages is : " + totalEmpWage);
+        return totalEmpWage;
+    }
+    public static void main(String[] args) {
+        System.out.println("Welcome To Employee Wage Computation Program");
+        computeWage();
     }
 }
